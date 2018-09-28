@@ -1,0 +1,73 @@
+Disclaimer: This suite has only been tested on linux debian/ubuntu.
+If it crashes on a different setup I'm not the one to blame. 
+
+            +----------------+
+            | GET IT RUNNING |
+            +----------------+
+
+Install by running make. Proper pre-todo is
+ +----------------------
+ | $ cat > .postitionofeigen.mk << EOF
+ | > Eigen = /path/to/eigen/
+ | > EOF
+ | $
+ +----------------------  
+because I built on different sites and one didn't have eigen
+installed. Read the code of main/informal.hpp to get an initial
+overview on how everything is working together. The suite needs
+testing material which you can provide by starting the GUI:
+ +----------------------
+ | navigate here, start the GUI
+ |  $ ./GUI.py & <---- wrong
+ |  $ ./GUI.py   <---- right
+ | in the GUI:
+ |  Get accommodated. You can hit one of the keys [cmp] to change the
+ |  edition mode of the net. Clicking left/right mouse buttons also
+ |  does cool things. There should be some Buttons on the right
+ |  that offer some geometries I already made and darth vader.
+ |  
+ |  Once you are finished save the thing via the menue, you will be
+ |  prompted with a menue in the shell that guides you through the
+ |  harsh travel of name-choosing. Currently not installed:
+ |  removing of nets other than by hand (which is done by editing
+ |  adj/nets textfile).
+ | 
+ | in the shell:
+ |  $ ./daq.py
+ | this creates .projects/ which is readable by the cpp programs
+ +----------------------
+After make did it's job the executables are in main named *.prog. 
+I did sth like 
+ +----------------------
+ | $ cat > ex << EOF
+ | > #!/bin/sh
+ | > ./main/a.prog 
+ | > ./main/b.prog
+ | $ chmod 770 ex
+ | $ nohup > LOG 2> ERRLOG ./ex &
+ +----------------------
+which is a good thing when you have made a list of really
+CPU-time thirsty programs to let them run in the background
+while you do sth else.
+
+            +-------------------+
+            | CODEBASE OVERVIEW |
+            +-------------------+
+
+cfet.cpp, disturbe.cpp, evolve.cpp, fut-past.cpp, lanczos.cpp
+:timeev.hpp: defines evolving and disturbing
+   -> cfets are not important here.
+   -> lanczos does the main job.
+   -> evolve is the function that has been used at most
+
+setup.cpp
+:setup.hpp: struct that bears information
+
+ham.cpp      
+:ham.hpp: how the hamiltonian is sculptured from the adjacency matrix
+  
+sparse.cpp
+:sparse.hpp: CRS format (where numeric load is born)
+
+density.cpp
+:density.hpp: just ignore
