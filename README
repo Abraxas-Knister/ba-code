@@ -1,5 +1,11 @@
 Disclaimer: This suite has only been tested on linux debian/ubuntu.
 If it crashes on a different setup I'm not the one to blame. 
+-----
+The pdf containing the original discussion is attached together
+with it's errata. No routines for plotting or computing the data shown
+in the discussion will be added in order to not make this too
+cumbersome. 
+
 
             +----------------+
             | GET IT RUNNING |
